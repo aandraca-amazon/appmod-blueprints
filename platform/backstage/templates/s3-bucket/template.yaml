@@ -76,7 +76,7 @@ spec:
         appNamespace: default
         argoInstance: in-cluster
         projectName: default
-        repoUrl: http://my-gitea-http.gitea.svc.cluster.local:3000/giteaAdmin/${{parameters.bucket_name}}
+        repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.bucket_name}}
         path: "manifests"
     - id: register
       name: Register
