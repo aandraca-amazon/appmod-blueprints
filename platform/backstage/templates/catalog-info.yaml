@@ -5,4 +5,5 @@ metadata:
   description: App Mod Backstage Templates
 spec:
   targets:
+    - ./app-deploy/template.yaml
     - ./s3-bucket/template.yaml
