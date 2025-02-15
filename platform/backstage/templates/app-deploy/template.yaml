@@ -49,12 +49,20 @@ spec:
         values:
           appName: ${{ parameters.appName }}
           environment: ${{ parameters.environment }}
-    - id: publish
-      name: Publishing to a gitea git repository
-      action: publish:gitea
+    - id: createGitlabGroup
+      name: Ensure Gitlab group exists
+      action: gitlab:group:ensureExists
       input:
-        description: App with ${{parameters.appName}} for ${{parameters.environment}}
-        repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
+        repoUrl: ${{ parameters.repoUrl }}
+        path:
+          - aandraca-aws
+    - id: publish
+      name: Publish
+      action: publish:gitlab
+      input:
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}?owner=${{ steps.createGitlabGroup.output.groupId }}
+        sourcePath: ./skeleton
         defaultBranch: main
     - id: create-argocd-app
       name: Create ArgoCD App
