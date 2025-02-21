@@ -76,7 +76,7 @@ spec:
         appNamespace: default
         argoInstance: in-cluster
         projectName: default
-        repoUrl: https://dhn8sz27uesh3.cloudfront.net/gitea/workshop-user/eks-fleet-workshop-gitops-platform/gitops/${{parameters.bucket_name}}
+        repoUrl: https://dhn8sz27uesh3.cloudfront.net/gitea/workshop-user/eks-fleet-workshop-gitops-platform
         path: "manifests"
     - id: register
       name: Register
