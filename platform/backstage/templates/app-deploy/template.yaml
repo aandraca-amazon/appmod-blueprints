@@ -15,7 +15,6 @@ spec:
     - title: Provide App Information
       required:
         - appName
-        - environment
         - repoName
       properties:
         appName:
@@ -43,12 +42,11 @@ spec:
         url: ./skeleton
         values:
           appName: ${{ parameters.appName }}
-          environment: ${{ parameters.environment }}
     - id: publish
       name: Publishing to a gitea git repository
       action: publish:gitea
       input:
-        description: App with ${{parameters.appName}} for ${{parameters.environment}}
+        description: App with ${{parameters.appName}} for 
         repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
         defaultBranch: main
     - id: create-argocd-app
@@ -57,7 +55,6 @@ spec:
       input:
         appName: ${{parameters.appName}}
         appNamespace: ${{parameters.appNamespace}}
-        argoInstance: ${{parameters.environment}}
         projectName: default
         repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
         path: "manifests"
