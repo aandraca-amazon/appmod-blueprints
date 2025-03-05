@@ -22,11 +22,6 @@ spec:
           title: App Name
           type: string
           description: Name of the App
-        environment:
-          title: Environment
-          type: string
-          description: The environment (e.g., dev, prod)
-          enum: ['dev-cluster', 'prod-cluster', 'in-cluster']
         repoName:
           title: Repo Name of your Gitea Repo
           type: string
@@ -49,20 +44,12 @@ spec:
         values:
           appName: ${{ parameters.appName }}
           environment: ${{ parameters.environment }}
-    - id: createGitlabGroup
-      name: Ensure Gitlab group exists
-      action: gitlab:group:ensureExists
-      input:
-        repoUrl: ${{ parameters.repoUrl }}
-        path:
-          - aandraca-aws
     - id: publish
-      name: Publish
-      action: publish:gitlab
+      name: Publishing to a gitea git repository
+      action: publish:gitea
       input:
-        description: This is ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}?owner=${{ steps.createGitlabGroup.output.groupId }}
-        sourcePath: ./skeleton
+        description: App with ${{parameters.appName}} for ${{parameters.environment}}
+        repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
         defaultBranch: main
     - id: create-argocd-app
       name: Create ArgoCD App
