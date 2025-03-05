@@ -47,7 +47,7 @@ spec:
       action: publish:gitea
       input:
         description: App with ${{parameters.appName}} for 
-        repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
+        repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}&owner=aandraca-amazon
         defaultBranch: main
     - id: create-argocd-app
       name: Create ArgoCD App
