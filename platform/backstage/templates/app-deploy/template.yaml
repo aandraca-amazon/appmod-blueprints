@@ -55,6 +55,7 @@ spec:
       input:
         appName: ${{parameters.appName}}
         appNamespace: ${{parameters.appNamespace}}
+        argoInstance: argocd.aaos.aandraca.people.aws.dev
         projectName: default
         repoUrl: ${{parameters.repoUrl}}?repo=${{parameters.repoName}}
         path: "manifests"
